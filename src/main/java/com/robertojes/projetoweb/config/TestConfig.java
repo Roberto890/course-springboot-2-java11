@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.robertojes.projetoweb.entities.Category;
 import com.robertojes.projetoweb.entities.Order;
 import com.robertojes.projetoweb.entities.User;
 import com.robertojes.projetoweb.entities.enums.OrderStatus;
+import com.robertojes.projetoweb.repositories.CategoryRepository;
 import com.robertojes.projetoweb.repositories.OrderRepository;
 import com.robertojes.projetoweb.repositories.UserRepository;
 
@@ -27,6 +29,9 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired
 	private OrderRepository orderRepository;
 	
+	@Autowired
+	private CategoryRepository categoryRepository;
+	
 	
 	// tudo q tiver dentro do metodo vai ser rodado
 	@Override
@@ -39,8 +44,13 @@ public class TestConfig implements CommandLineRunner{
 		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, u2);
 		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, u1); 
 		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers"); 
+		
 		//save all salva no banco ai usa array pra usar os 2 usuarios
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
+		categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 	}
 }
