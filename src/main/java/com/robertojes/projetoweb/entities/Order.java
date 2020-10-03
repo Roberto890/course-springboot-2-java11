@@ -2,6 +2,8 @@ package com.robertojes.projetoweb.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,9 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.robertojes.projetoweb.entities.enums.OrderItem;
 import com.robertojes.projetoweb.entities.enums.OrderStatus;
 
 @Entity
@@ -34,6 +38,8 @@ public class Order implements Serializable {
 	@JoinColumn(name = "client_id") // colocar chave estrangeira
 	private User client;
 	
+	@OneToMany(mappedBy = "id.order")//pega o id do order pq ele é o orderitemPK e é ele q tem o many to one com o order
+	private Set<OrderItem> items = new HashSet<>();
 
 	public Order() {
 
@@ -81,6 +87,10 @@ public class Order implements Serializable {
 		this.client = client;
 	}
 
+	public Set<OrderItem> getItems(){
+		return items;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

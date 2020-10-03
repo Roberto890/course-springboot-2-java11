@@ -6,6 +6,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.robertojes.projetoweb.entities.Order;
 import com.robertojes.projetoweb.entities.Product;
 import com.robertojes.projetoweb.entities.pk.OrderItemPK;
@@ -16,7 +17,7 @@ public class OrderItem implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	@EmbeddedId //pq a classe orderitem é embedded
-	private OrderItemPK id;
+	private OrderItemPK id = new OrderItemPK();
 	
 	private Integer quantity;
 	private Double price;
@@ -33,6 +34,9 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 	
+	//tem que colocar aqui pq o que vale é o get nao da pra colocar
+	//no orderitemPK
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}

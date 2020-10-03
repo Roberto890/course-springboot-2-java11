@@ -12,8 +12,10 @@ import com.robertojes.projetoweb.entities.Category;
 import com.robertojes.projetoweb.entities.Order;
 import com.robertojes.projetoweb.entities.Product;
 import com.robertojes.projetoweb.entities.User;
+import com.robertojes.projetoweb.entities.enums.OrderItem;
 import com.robertojes.projetoweb.entities.enums.OrderStatus;
 import com.robertojes.projetoweb.repositories.CategoryRepository;
+import com.robertojes.projetoweb.repositories.OrderItemRepository;
 import com.robertojes.projetoweb.repositories.OrderRepository;
 import com.robertojes.projetoweb.repositories.ProductRepository;
 import com.robertojes.projetoweb.repositories.UserRepository;
@@ -37,6 +39,9 @@ public class TestConfig implements CommandLineRunner{
 	@Autowired
 	private ProductRepository productRepository;
 	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
+	
 	
 	// tudo q tiver dentro do metodo vai ser rodado
 	@Override
@@ -59,12 +64,18 @@ public class TestConfig implements CommandLineRunner{
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, ""); 
 
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
+
 		
 		//save all salva no banco ai usa array pra usar os 2 usuarios
 		userRepository.saveAll(Arrays.asList(u1,u2));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3));
 		categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
 		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
 		//colocar qual produto é de qual categoria etc
 		p1.getCategories().add(cat2);
