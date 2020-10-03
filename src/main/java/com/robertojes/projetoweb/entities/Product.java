@@ -11,8 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.robertojes.projetoweb.entities.enums.OrderItem;
 
 @Entity
 @Table(name = "tb_product")
@@ -37,6 +40,9 @@ public class Product implements Serializable {
 	//coloca no inverse o id da categoria e tem q colocar rreferencia na Category
 	) 
 	private Set<Category> categories =  new HashSet<>();
+	
+	@OneToMany(mappedBy = "id.order")//pega o id do order pq ele é o orderitemPK e é ele q tem o many to one com o order
+	private Set<OrderItem> items = new HashSet<>();
 	
 	public Product() {
 		
@@ -94,7 +100,17 @@ public class Product implements Serializable {
 	public Set<Category> getCategories() {
 		return categories;
 	}
-
+	
+	@JsonIgnore
+	public Set<Order> getOrders(){
+		Set<Order> set = new HashSet<>();
+		for (OrderItem x : items) {
+			set.add(x.getOrder());
+		}
+		
+		return set;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
