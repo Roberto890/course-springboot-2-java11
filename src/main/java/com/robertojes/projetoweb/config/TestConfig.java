@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.robertojes.projetoweb.entities.Category;
 import com.robertojes.projetoweb.entities.Order;
+import com.robertojes.projetoweb.entities.Payment;
 import com.robertojes.projetoweb.entities.Product;
 import com.robertojes.projetoweb.entities.User;
 import com.robertojes.projetoweb.entities.enums.OrderItem;
@@ -88,5 +89,13 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		//pagando uma order
+		// quando é 1 pra 1 nao usa o repository da tabela estrangeira e sem da tabela principal
+		//Assim q funciona no JPA
+		Payment pay1 = new Payment(null, Instant.parse("2019-06-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+		orderRepository.save(o1);
+		
 	}
 }
