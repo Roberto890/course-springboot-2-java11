@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.robertojes.projetoweb.Services.UserService;
 import com.robertojes.projetoweb.entities.User;
+import com.robertojes.projetoweb.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users") //coloca o endereço para onde vai ficar o metodo

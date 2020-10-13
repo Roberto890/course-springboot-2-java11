@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.robertojes.projetoweb.Services.CategoryService;
 import com.robertojes.projetoweb.entities.Category;
+import com.robertojes.projetoweb.services.CategoryService;
 
 @RestController
 @RequestMapping(value = "/categories") //coloca o endereço para onde vai ficar o metodo

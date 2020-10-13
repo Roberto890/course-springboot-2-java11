@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.robertojes.projetoweb.Services.OrderService;
 import com.robertojes.projetoweb.entities.Order;
+import com.robertojes.projetoweb.services.OrderService;
 
 @RestController
 @RequestMapping(value = "/orders") //coloca o endereço para onde vai ficar o metodo

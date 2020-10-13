@@ -1,4 +1,4 @@
-package com.robertojes.projetoweb.Services;
+package com.robertojes.projetoweb.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.robertojes.projetoweb.entities.User;
 import com.robertojes.projetoweb.repositories.UserRepository;
+import com.robertojes.projetoweb.services.exception.ResourceNotFoundException;
 
 // anotação pra virar componente @Component
 // anotação pra virar repositorio (mais especifico) @Repository
@@ -23,7 +24,8 @@ public class UserService {
 	
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+					//tenta dar o get se nao for lança exception
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User insert(User obj) {

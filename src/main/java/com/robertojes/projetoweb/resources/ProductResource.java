@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.robertojes.projetoweb.Services.ProductService;
 import com.robertojes.projetoweb.entities.Product;
+import com.robertojes.projetoweb.services.ProductService;
 
 @RestController
 @RequestMapping(value = "/products") //coloca o endereço para onde vai ficar o metodo
